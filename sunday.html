@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunday</title>
+<style>
+
+
+body {
+  background-image:url('asta2.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    width: 90%;
+  }
+}
+
+
+
+.container {
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.7); /* Adjust the last value (0.7) to change the transparency */
+}
+
+.checkbox-group {
+  margin-bottom: 10px;
+}
+
+.checkbox-group label {
+  display: block;
+}
+
+#textInput {
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#result {
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>TO DO LIST</h2>
+  <form id="optionForm">
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="option" value="option1">Sunlight</label>
+      <label><input type="checkbox" name="option" value="option2">Exc</label>
+      <label><input type="checkbox" name="option" value="option3">Check Email</label>
+      <label><input type="checkbox" name="option" value="option4"> Java</label>
+      <label><input type="checkbox" name="option" value="option5"> DSA</label>
+      <label><input type="checkbox" name="option" value="option6">Leetcode practice,any other platforms</label>
+      <label><input type="checkbox" name="option" value="option7">PAT activities</label>
+      <label><input type="checkbox" name="option" value="option8">Assignments</label>
+      <label><input type="checkbox" name="option" value="option9"><b>Project updates</b></label>
+      <label><input type="checkbox" name="option" value="option10"><b>Resume modification</b>(optional)</label>
+      <label><input type="checkbox" name="option" value="option11"><b>Github,LinkedIn profile</b>(optional)</label>
+      <label><input type="checkbox" name="option" value="option12"><b>DBMS,OS,CN,OOPS</b>(optional)</label>
+      <label><input type="checkbox" name="option" value="option13">8 hrs sleep(Check Email)</label>
+    </div>
+    <div id="textInput">
+      <input type="text" id="customOption" placeholder="Enter custom option">
+      <button type="button" onclick="addCustomOption()">Add Option</button>
+    </div>
+    <button type="button" onclick="getSelectedOptions()">Submit</button>
+  </form>
+  <div id="result"></div>
+</div>
+
+<script>
+function getSelectedOptions() {
+  var checkboxes = document.querySelectorAll('input[name="option"]');
+  var selectedOptions = [];
+  checkboxes.forEach(function(checkbox) {
+    if (!checkbox.checked) {
+      selectedOptions.push(checkbox.value);
+    }
+  });
+  document.getElementById("result").innerHTML = "Options not selected: " + selectedOptions.join(", ");
+}
+
+function addCustomOption() {
+  var customOptionInput = document.getElementById("customOption");
+  var customOptionValue = customOptionInput.value.trim();
+  if (customOptionValue !== "") {
+    var customOptionCheckbox = document.createElement("input");
+    customOptionCheckbox.type = "checkbox";
+    customOptionCheckbox.name = "option";
+    customOptionCheckbox.value = customOptionValue;
+    var customOptionLabel = document.createElement("label");
+    customOptionLabel.appendChild(customOptionCheckbox);
+    customOptionLabel.appendChild(document.createTextNode(" " + customOptionValue));
+    var checkboxGroup = document.querySelector(".checkbox-group");
+    checkboxGroup.appendChild(customOptionLabel);
+    customOptionInput.value = "";
+  }
+}
+</script>
+
+</body>
+</html>
